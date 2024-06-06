@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Solution</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="solutionSteps.length > 0">
+    <ion-item *ngFor="let step of solutionSteps">
+      <ion-label>
+        <h2>{{ step.title }}</h2>
+        <p>{{ step.description }}</p>
+        <img *ngIf="step.image" [src]="step.image" alt="Step Image">
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
