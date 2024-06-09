@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Solution Steps</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let step of solutionSteps">
+    <ion-card-header>
+      <ion-card-title>{{ step['title'] }}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p>{{ step['description'] }}</p>
+      <ion-img *ngIf="step['image_url']" [src]="step['image_url']" alt="Step Image"></ion-img>
+      <p>Step Number: {{ step['step_number'] }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

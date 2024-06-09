@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Enter or scan a question" [(ngModel)]="searchQuery"></ion-searchbar>
+  <ion-button expand="full" (click)="scanQuestion()">Scan</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let search of recentSearches">
+      <ion-label>{{ search }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
