@@ -1,9 +1,77 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
 :root {
---ion-color-primary: #00FF00;
---ion-color-secondary: #87CEEB;
---ion-color-tertiary: #FF6F61;
---ion-color-background: #F5F5F5;
---ion-color-text: #2F4F4F;
+    --ion-background-color: #EFEFEF
+    --ion-background-color-rgb: 239, 239, 239
+    --ion-text-color: #2C3E50
+    --ion-text-color-rgb: 44, 62, 80
+    --ion-backdrop-color: #8E44AD
+    --ion-backdrop-opacity: 0.6
+    --ion-overlay-background-color: #FFFFFF
+    --ion-border-color: #BDC3C7
+    --ion-box-shadow-color: rgba(0, 0, 0, 0.2)
+    --ion-tab-bar-background: #EFEFEF
+    --ion-tab-bar-background-focused: #FFFFFF
+    --ion-tab-bar-border-color: #BDC3C7
+    --ion-tab-bar-color: #34495E
+    --ion-tab-bar-color-selected: #8E44AD
+    --ion-toolbar-background: #EFEFEF
+    --ion-toolbar-border-color: #BDC3C7
+    --ion-toolbar-color: #34495E
+    --ion-toolbar-segment-color: #34495E
+    --ion-toolbar-segment-color-checked: #8E44AD
+    --ion-toolbar-segment-background: #FFFFFF
+    --ion-toolbar-segment-background-checked: #BDC3C7
+    --ion-toolbar-segment-indicator-color: #8E44AD
+    --ion-item-background: #FFFFFF
+    --ion-item-border-color: #BDC3C7
+    --ion-item-color: #34495E
+    --ion-placeholder-color: #8E44AD
 }
+
+body {
+    background: linear-gradient(135deg, #F7F9FC 0%, #FFFFFF 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .abstract-shape {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(208, 216, 220, 0.5); /* Light gray with transparency */
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .abstract-shape:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    background: rgba(185, 209, 212, 0.4); /* Light pastel blue with transparency */
+    top: 50%;
+    left: 30%;
+    animation-duration: 7s ease-in-out infinite;
+  }
+  
+  .abstract-shape:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    background: rgba(224, 224, 224, 0.3); /* Lighter gray with transparency */
+    top: 20%;
+    left: 70%;
+    animation-duration: 5s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .alert-wrapper {
+    background: #FFFFFF !important;
+
+  }
