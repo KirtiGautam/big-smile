@@ -41,7 +41,7 @@ export class HomePage {
   }
 
   async sendImageToBackend(base64String: string) {
-    const url = 'http://localhost:2121/upload'; // Replace with your backend endpoint
+    const url = 'http://localhost:2121/extract_text'; // Replace with your backend endpoint
     const blob = this.base64ToBlob(base64String, 'image/jpeg');
     const formData = new FormData();
     formData.append('image', blob, 'image.jpg');
