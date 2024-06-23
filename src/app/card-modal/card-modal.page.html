@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ selectedStep?.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <p>{{ selectedStep?.description }}</p>
+      <ion-img *ngIf="selectedStep?.image_url" [src]="selectedStep?.image_url" alt="Step Image"></ion-img>
+      <p>Step Number: {{ selectedStep?.step_number }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

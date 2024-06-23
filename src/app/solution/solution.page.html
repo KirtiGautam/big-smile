@@ -1,9 +1,9 @@
 <ion-content>
-  <ion-card *ngFor="let step of solutionSteps">
+  <ion-card *ngFor="let step of solutionSteps" (click)="openModal(step)">
     <ion-card-header>
       <ion-card-title>{{ step['title'] }}</ion-card-title>
     </ion-card-header>
-    
+
     <ion-card-content>
       <p>{{ step['description'] }}</p>
       <ion-img *ngIf="step['image_url']" [src]="step['image_url']" alt="Step Image"></ion-img>
