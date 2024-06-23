@@ -1,1 +1,13 @@
-e
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Symbol (Abstract light bulb with circuit) -->
+  <g>
+    <circle cx="30" cy="30" r="15" stroke="#3498DB" stroke-width="3"/>
+    <path d="M30 15 L30 5 M30 5 L25 10 M30 5 L35 10" stroke="#3498DB" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="30" cy="30" r="10" fill="#3498DB"/>
+    <circle cx="30" cy="30" r="5" fill="#F7F9FC"/>
+    <path d="M30 45 L30 55 M30 55 L25 50 M30 55 L35 50" stroke="#34495E" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Text -->
+  <text x="60" y="35" font-family="Arial, sans-serif" font-size="24" fill="#34495E">Insta</text>
+  <text x="115" y="35" font-family="Arial, sans-serif" font-size="24" fill="#3498DB">Solution</text>
+</svg>

@@ -1,8 +1,10 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import axios from 'axios';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { LoadingController } from '@ionic/angular';
+import { CommonService } from 'src/common.service';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +15,7 @@ export class HomePage {
   searchQuery: string = '';
   recentSearches: string[] = [];
 
-  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController, private router: Router) { }
-
-  onSearch() {
-    if (this.searchQuery.trim() !== '') {
-      this.recentSearches.unshift(this.searchQuery);
-      this.recentSearches = this.recentSearches.slice(0, 5); // Limit to 5 recent searches
-      this.fetchSolution(this.searchQuery);
-    }
-  }
+  constructor(private router: Router, private loadingController: LoadingController, private httpService: HttpService, private commonService: CommonService) { }
 
   async scanQuestion() {
     try {
@@ -36,75 +30,64 @@ export class HomePage {
         this.sendImageToBackend(image.base64String);
       }
     } catch (error) {
-      this.presentAlert('Scan Failed', 'Failed to scan the question. Please try again.');
+      this.commonService.presentAlert('Scan Failed', 'Failed to scan the question. Please try again.');
     }
   }
 
   async sendImageToBackend(base64String: string) {
-    const url = 'http://localhost:2121/extract_text'; // Replace with your backend endpoint
+    const endpoint = 'extract_text';
     const blob = this.base64ToBlob(base64String, 'image/jpeg');
     const formData = new FormData();
     formData.append('image', blob, 'image.jpg');
-  
-    try {
-      const response = await axios.post(url, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+
+    const loading = await this.loadingController.create({
+      message: 'Uploading...',
+      spinner: 'circles'
+    });
+
+    await loading.present();
+
+    const headers = new HttpHeaders();
+
+    // Set content type header
+    headers.set('Content-Type', 'multipart/form-data');
+    this.httpService.post(endpoint, formData, headers
+    ).subscribe({
+      next: (response: any) => {
+        console.log('Image uploaded successfully:', response);
+        this.commonService.presentToast('Image uploaded successfully.');
+
+        if (Array.isArray(response)) {
+          this.router.navigate(['/solution'], { state: { solutionSteps: response } });
         }
-      });
-      console.log('Image uploaded successfully:', response.data);
-      this.presentToast('Image uploaded successfully.');
-      
-      // Redirect to Solutions page
-      if (Array.isArray(response.data)) {
-        this.router.navigate(['/solution'], { state: { solutionSteps: response.data } });
+      },
+      error: (error: any) => {
+        console.error('Error while uploading image:', JSON.stringify(error));
+        this.commonService.presentAlert('Upload Failed', 'Failed to upload image. Please try again.');
+      },
+      complete: async () => {
+        await loading.dismiss();
       }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      this.presentAlert('Upload Failed', 'Failed to upload image. Please try again.');
-    }
+    });
   }
-  
+
   base64ToBlob(base64: string, contentType: string): Blob {
     const byteCharacters = atob(base64);
     const byteArrays = [];
-  
+
     for (let offset = 0; offset < byteCharacters.length; offset += 512) {
       const slice = byteCharacters.slice(offset, offset + 512);
       const byteNumbers = new Array(slice.length);
-  
+
       for (let i = 0; i < slice.length; i++) {
         byteNumbers[i] = slice.charCodeAt(i);
       }
-  
+
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
-  
+
     return new Blob(byteArrays, { type: contentType });
   }
 
-  async fetchSolution(query: string) {
-    // Fetch solution steps based on the query
-    console.log('Fetching solution for:', query);
-    // Implement the logic to fetch and display the solution
-  }
-
-  async presentAlert(header: string, message: string) {
-    const alert = await this.alertCtrl.create({
-      header,
-      message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 2000,
-      position: 'bottom'
-    });
-    toast.present();
-  }
 }

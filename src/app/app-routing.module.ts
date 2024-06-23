@@ -13,16 +13,20 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'solution',
-    loadChildren: () => import('./solution/solution.module').then( m => m.SolutionPageModule)
+    loadChildren: () => import('./solution/solution.module').then(m => m.SolutionPageModule)
   },
   {
     path: 'splash',
-    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  }
+    loadChildren: () => import('./splash/splash.module').then(m => m.SplashPageModule)
+  },
+  {
+    path: 'card-modal',
+    loadChildren: () => import('./card-modal/card-modal.module').then(m => m.CardModalPageModule)
+  },
 ];
 
 @NgModule({
@@ -31,4 +35,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
