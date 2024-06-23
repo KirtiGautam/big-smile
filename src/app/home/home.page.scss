@@ -1,8 +1,6 @@
-ion-content {
-    padding: 16px;
-  }
-  
-  ion-button {
-    margin-top: 10px;
-  }
-  
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

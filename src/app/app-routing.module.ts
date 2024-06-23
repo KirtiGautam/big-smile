@@ -4,8 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'splash',
     pathMatch: 'full'
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then(m => m.SplashPageModule)
   },
   {
     path: 'home',
@@ -14,6 +18,10 @@ const routes: Routes = [
   {
     path: 'solution',
     loadChildren: () => import('./solution/solution.module').then( m => m.SolutionPageModule)
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
   }
 ];
 
